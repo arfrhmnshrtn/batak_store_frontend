@@ -26,7 +26,8 @@ export default function PosView({ onAddOrder }) {
   const [cart, setCart] = useState([]);
   const [customerName, setCustomerName] = useState('');
   const [tableNumber, setTableNumber] = useState('01');
-  const [paymentMethod, setPaymentMethod] = useState('QRIS');
+  const [paymentMethod, setPaymentMethod] = useState('Tunai');
+  const [paymentStatus, setPaymentStatus] = useState('Lunas');
   const [cashGiven, setCashGiven] = useState('');
 
   // Receipt Modal State
@@ -42,7 +43,7 @@ export default function PosView({ onAddOrder }) {
         if (res && Array.isArray(res.data)) data = res.data;
         else if (res && res.data && Array.isArray(res.data.data)) data = res.data.data;
         else if (Array.isArray(res)) data = res;
-        
+
         if (Array.isArray(data)) {
           const mapped = data.map(item => {
             const icons = { sate: '🍢', nasi: '🍙', minuman: '🍹', gorengan: '🥟' };
@@ -66,7 +67,7 @@ export default function PosView({ onAddOrder }) {
 
   const categories = [
     { id: 'semua', label: 'Semua Menu' },
-    { id: 'bakaran', label: 'Bakaran' },
+    { id: 'Rokok', label: 'Rokok' },
     { id: 'jajanan', label: 'Jajanan' },
     { id: 'minuman', label: 'Minuman' },
     { id: 'makanan', label: 'Makanan' },
@@ -126,7 +127,7 @@ export default function PosView({ onAddOrder }) {
   // Handle Complete Order (Checkout)
   const handleCheckout = async (e) => {
     e.preventDefault();
-    
+
     if (!customerName.trim()) {
       alert('Nama pelanggan wajib diisi!');
       return;
@@ -134,10 +135,7 @@ export default function PosView({ onAddOrder }) {
 
     if (cart.length === 0) return;
 
-    if (paymentMethod === 'Tunai' && cashNum < total) {
-      alert('Jumlah uang tunai yang dimasukkan kurang dari total tagihan!');
-      return;
-    }
+
 
     try {
       const payload = {
@@ -145,7 +143,9 @@ export default function PosView({ onAddOrder }) {
         items: cart.map(item => ({
           id_menu: item.id,
           jumlah: item.qty
-        }))
+        })),
+        metode_pembayaran: paymentMethod,
+        status_pembayaran: paymentStatus
       };
 
       const result = await api.post('/pos-kasir', payload);
@@ -166,7 +166,7 @@ export default function PosView({ onAddOrder }) {
         total: `Rp ${total.toLocaleString('id-ID')}`,
         rawTotal: total,
         payment: paymentMethod,
-        paymentStatus: paymentMethod === 'belum_bayar' ? 'belum_bayar' : 'Lunas',
+        paymentStatus: paymentStatus,
         time: formattedTime,
         date: now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
       };
@@ -390,7 +390,32 @@ export default function PosView({ onAddOrder }) {
         {/* Payment Options & Summary */}
         <div className="flex flex-col gap-2.5">
 
+          <div className="flex gap-2">
+            <div className="flex-1 flex flex-col gap-1">
+              <label className="block text-xs font-semibold text-text-secondary">Metode</label>
+              <select
+                className="w-full bg-main border border-border rounded-lg text-sm text-text px-3 py-1.5 focus:outline-none focus:border-primary transition-all"
+                value={paymentMethod}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              >
+                <option value="Tunai">Tunai</option>
+                <option value="QRIS">QRIS</option>
+                <option value="Transfer">Transfer</option>
+              </select>
+            </div>
 
+            <div className="flex-1 flex flex-col gap-1">
+              <label className="block text-xs font-semibold text-text-secondary">Status</label>
+              <select
+                className="w-full bg-main border border-border rounded-lg text-sm text-text px-3 py-1.5 focus:outline-none focus:border-primary transition-all"
+                value={paymentStatus}
+                onChange={(e) => setPaymentStatus(e.target.value)}
+              >
+                <option value="Lunas">Lunas</option>
+                <option value="Utang">Utang</option>
+              </select>
+            </div>
+          </div>
 
           {/* Total Box */}
           <div className="bg-main p-3 rounded-lg border border-border mt-1.5 flex justify-between items-center">

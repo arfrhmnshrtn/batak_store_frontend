@@ -18,7 +18,8 @@ import {
   Receipt,
   BookOpen,
   Calculator,
-  X
+  X,
+  Store
 } from 'lucide-react';
 
 export default function Sidebar({ collapsed, setCollapsed, activeTab, setActiveTab, mobileOpen, setMobileOpen }) {
@@ -74,7 +75,7 @@ export default function Sidebar({ collapsed, setCollapsed, activeTab, setActiveT
     }
 
     if (userRoleStr === 'OWNER') {
-      return { ...group, items: items.filter(item => !['pos', 'pesanan', 'katalog'].includes(item.id)) };
+      return { ...group, items };
     }
 
     return {
@@ -90,11 +91,11 @@ export default function Sidebar({ collapsed, setCollapsed, activeTab, setActiveT
         <div className="p-5 flex items-center justify-between border-b border-border-sidebar">
           <a href="#dashboard" className="flex items-center gap-3 no-underline overflow-hidden" onClick={() => setActiveTab('dashboard')}>
             <div className="w-10 h-10 rounded-xl bg-linear-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white shrink-0 shadow-lg shadow-blue-600/30">
-              <Utensils size={22} />
+              <Store size={22} />
             </div>
             {!collapsed && (
               <div className="flex flex-col whitespace-nowrap">
-                <span className="text-[1.1rem] font-bold text-white tracking-tight">Angkringan 808</span>
+                <span className="text-[1.1rem] font-bold text-white tracking-tight">Batak Store 808</span>
                 <span className="text-xs text-blue-500 font-semibold uppercase tracking-wider">Admin Panel</span>
               </div>
             )}

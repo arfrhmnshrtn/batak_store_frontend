@@ -112,7 +112,7 @@ export default function LoginView({ onLoginSuccess }) {
           <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 text-primary">
             <Store size={32} />
           </div>
-          <h1 className="text-2xl font-black text-text tracking-tight">ANGKRINGAN 808</h1>
+          <h1 className="text-2xl font-black text-text tracking-tight">Batak Store 808</h1>
           <p className="text-sm text-text-secondary mt-1">Silakan masuk untuk melanjutkan</p>
         </div>
 
