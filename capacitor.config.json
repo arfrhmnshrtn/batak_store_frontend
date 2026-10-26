@@ -1,0 +1,9 @@
+{
+  "appId": "com.nasution.app",
+  "appName": "Kasir Nasution",
+  "webDir": "dist",
+  "server": {
+    "cleartext": true,
+    "androidScheme": "http"
+  }
+}
