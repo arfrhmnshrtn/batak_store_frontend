@@ -17,7 +17,7 @@ export default function TopProductsTable({ products, isFullPage = false }) {
             </button>
           )}
           <Package size={20} className="text-primary" />
-          <span>Menu Terlaris</span>
+          <span>Produk Terlaris</span>
         </div>
       </div>
 
@@ -53,14 +53,14 @@ export default function TopProductsTable({ products, isFullPage = false }) {
               ))}
             </tbody>
           </table>
-          
-          
+
+
           {!isFullPage && products?.length > 5 && (
-            <div 
-              className="flex justify-center border-t border-border p-3 bg-main/5 hover:bg-main/20 transition-colors w-full cursor-pointer" 
+            <div
+              className="flex justify-center border-t border-border p-3 bg-main/5 hover:bg-main/20 transition-colors w-full cursor-pointer"
               onClick={() => navigate('/analysis/top-products', { state: { products } })}
             >
-              <button 
+              <button
                 className="text-xs font-semibold text-primary flex items-center gap-1.5 focus:outline-hidden"
               >
                 Lihat Detail ({products.length} Menu) <ChevronRight size={14} />

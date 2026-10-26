@@ -35,6 +35,8 @@ export default function AddEditMenuModal({
       url_gambar: formData.image || presetImages[0].url
     };
 
+    console.log(payload)
+
     setIsSubmitting(true);
     try {
       if (editingItem) {
@@ -89,7 +91,7 @@ export default function AddEditMenuModal({
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
               >
-                <option value="bakaran"> Bakaran</option>
+                <option value="rokok"> Rokok</option>
                 <option value="jajanan"> Jajanan</option>
                 <option value="minuman"> Minuman</option>
                 <option value="makanan"> Makanan</option>

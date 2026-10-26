@@ -17,7 +17,7 @@ export default function BadProductTable({ products, isFullPage = false }) {
             </button>
           )}
           <TrendingDown size={20} className="text-red-500" />
-          <span>Menu Kurang Laku</span>
+          <span>Produk Kurang Laku</span>
         </div>
       </div>
 
@@ -54,13 +54,13 @@ export default function BadProductTable({ products, isFullPage = false }) {
             </tbody>
           </table>
 
-          
+
           {!isFullPage && products?.length > 5 && (
-            <div 
-              className="flex justify-center border-t border-border p-3 bg-red-50/50 hover:bg-red-50 dark:bg-red-900/10 dark:hover:bg-red-900/20 transition-colors w-full cursor-pointer" 
+            <div
+              className="flex justify-center border-t border-border p-3 bg-red-50/50 hover:bg-red-50 dark:bg-red-900/10 dark:hover:bg-red-900/20 transition-colors w-full cursor-pointer"
               onClick={() => navigate('/analysis/bad-products', { state: { products } })}
             >
-              <button 
+              <button
                 className="text-xs font-semibold text-red-500 flex items-center gap-1.5 focus:outline-hidden"
               >
                 Lihat Detail ({products.length} Menu) <ChevronRight size={14} />

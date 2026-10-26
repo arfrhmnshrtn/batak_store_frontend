@@ -60,10 +60,10 @@ export const DashboardPage = ({ setActiveTab }) => {
             Selamat Datang, {user?.name || user?.fullname || 'User'}!
           </h1>
           <p className="text-sm text-text-secondary leading-relaxed">
-            Pantau ringkasan operasional harian, transaksi pesanan, dan laporan pengeluaran Angkringan Anda secara keseluruhan dari satu panel utama.
+            Pantau ringkasan operasional harian, transaksi pesanan, dan laporan pengeluaran Toko Anda secara keseluruhan dari satu panel utama.
           </p>
         </div>
-        
+
         <div className="flex flex-col sm:flex-row gap-3 min-w-50 w-full md:w-auto">
           {roleName === 'KASIR' ? (
             <Button

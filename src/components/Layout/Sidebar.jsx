@@ -34,8 +34,7 @@ export default function Sidebar({ collapsed, setCollapsed, activeTab, setActiveT
       items: [
         { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
         { id: 'pos', label: 'Kasir (Order)', icon: Calculator, badge: '' },
-        { id: 'pesanan', label: 'Pesanan Baru', icon: ShoppingBag, badge: '' },
-        { id: 'katalog', label: 'Katalog Menu', icon: UtensilsCrossed }
+        { id: 'katalog', label: 'Katalog Produk', icon: UtensilsCrossed }
       ]
     },
     {

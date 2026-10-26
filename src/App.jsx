@@ -197,7 +197,7 @@ export default function App() {
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div>
                 <h1 className="text-2xl font-extrabold text-text mb-1 tracking-tight">
-                  {activeTab === 'pos' && 'Kasir POS (Input Pembelian)'}
+                  {activeTab === 'pos' && 'Kasir (Input Pembelian)'}
                   {activeTab === 'pesanan' && 'Kelola Pesanan'}
                   {activeTab === 'katalog' && 'Katalog & Stok Menu'}
                   {activeTab === 'pelanggan' && 'Data Pelanggan'}
@@ -212,7 +212,7 @@ export default function App() {
                   {activeTab === 'pengaturan' && 'Pengaturan Toko'}
                 </h1>
                 <p className="text-sm text-text-secondary">
-                  Selamat datang kembali, {user?.fullname || user?.name || 'Kasir'}! Berikut ringkasan operasional Angkringan hari ini.
+                  Selamat datang kembali, {user?.fullname || user?.name || 'Kasir'}!
                 </p>
               </div>
             </div>

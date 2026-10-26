@@ -26,8 +26,8 @@ export default function PosView({ onAddOrder }) {
   const [cart, setCart] = useState([]);
   const [customerName, setCustomerName] = useState('');
   const [tableNumber, setTableNumber] = useState('01');
-  const [paymentMethod, setPaymentMethod] = useState('Tunai');
-  const [paymentStatus, setPaymentStatus] = useState('Lunas');
+  const [paymentMethod, setPaymentMethod] = useState('tunai');
+  const [paymentStatus, setPaymentStatus] = useState('lunas');
   const [cashGiven, setCashGiven] = useState('');
 
   // Receipt Modal State
@@ -114,7 +114,7 @@ export default function PosView({ onAddOrder }) {
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
   const total = subtotal; // Can add tax/discount if needed
   const cashNum = Number(cashGiven) || 0;
-  const changeAmount = paymentMethod === 'Tunai' ? Math.max(0, cashNum - total) : 0;
+  const changeAmount = paymentMethod === 'tunai' ? Math.max(0, cashNum - total) : 0;
 
   // Filter products
   const filteredProducts = productList.filter(p => {
@@ -398,9 +398,9 @@ export default function PosView({ onAddOrder }) {
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
               >
-                <option value="Tunai">Tunai</option>
-                <option value="QRIS">QRIS</option>
-                <option value="Transfer">Transfer</option>
+                <option value="tunai">Tunai</option>
+                <option value="qris">QRIS</option>
+                <option value="transfer">Transfer</option>
               </select>
             </div>
 
@@ -411,8 +411,8 @@ export default function PosView({ onAddOrder }) {
                 value={paymentStatus}
                 onChange={(e) => setPaymentStatus(e.target.value)}
               >
-                <option value="Lunas">Lunas</option>
-                <option value="Utang">Utang</option>
+                <option value="lunas">Lunas</option>
+                <option value="hutang">Hutang</option>
               </select>
             </div>
           </div>

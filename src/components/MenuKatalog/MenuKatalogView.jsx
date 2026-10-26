@@ -43,8 +43,7 @@ export default function MenuKatalogView() {
             rawHargaBeli: item.harga_modal,
             stock: stockNum,
             status: autoStatus,
-            image: item.url_gambar || 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80',
-            desc: item.desc || item.deskripsi || 'Varian spesial Angkringan.'
+            image: item.url_gambar || 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80'
           };
         });
         setMenuList(mapped);
@@ -61,7 +60,7 @@ export default function MenuKatalogView() {
   // Modal States
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
-  
+
   // Alert State
   const [successAlert, setSuccessAlert] = useState({ show: false, message: '' });
 
@@ -93,7 +92,7 @@ export default function MenuKatalogView() {
     setEditingItem(null);
     setFormData({
       name: '',
-      category: 'bakaran',
+      category: 'rokok',
       harga_jual: '4000',
       price: '2000',
       stock: 30,
@@ -137,13 +136,13 @@ export default function MenuKatalogView() {
 
   const handleSaveSuccess = async (isEdit) => {
     setIsModalOpen(false);
-    
+
     if (isEdit) {
       setSuccessAlert({ show: true, message: 'Berhasil memperbarui menu!' });
     } else {
       setSuccessAlert({ show: true, message: 'Berhasil menambahkan menu baru!' });
     }
-    
+
     await fetchKatalog();
 
     setTimeout(() => {
@@ -200,8 +199,7 @@ export default function MenuKatalogView() {
           <div className="flex items-center gap-3">
             <UtensilsCrossed size={24} className="text-primary" />
             <div>
-              <h2 className="text-lg font-bold text-text mb-0.5">Katalog & Stok Menu Angkringan</h2>
-              <p className="text-sm text-text-secondary">Kelola item menu, foto hidangan, harga jual & stok terkini</p>
+              <h2 className="text-lg font-bold text-text mb-0.5">Katalog & Stok Menu Toko</h2>
             </div>
           </div>
 
@@ -228,16 +226,16 @@ export default function MenuKatalogView() {
 
         {/* Category Filters */}
         <div className="flex items-center flex-wrap gap-2 pt-2">
-          {['semua', 'bakaran', 'jajanan', 'minuman', 'makanan'].map(cat => (
+          {['semua', 'rokok', 'jajanan', 'minuman', 'makanan'].map(cat => (
             <button
               key={cat}
               className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all capitalize border ${selectedCategory === cat
-                  ? 'bg-primary text-white border-primary shadow-md'
-                  : 'bg-main text-text-secondary border-border hover:bg-border/50'
+                ? 'bg-primary text-white border-primary shadow-md'
+                : 'bg-main text-text-secondary border-border hover:bg-border/50'
                 }`}
               onClick={() => setSelectedCategory(cat)}
             >
-              {cat === 'bakaran' ? 'bakaran' : cat === 'jajanan' ? 'jajanan' : cat === 'minuman' ? 'minuman' : cat === 'makanan' ? 'makanan' : 'Semua Kategori'}
+              {cat === 'rokok' ? 'rokok' : cat === 'jajanan' ? 'jajanan' : cat === 'minuman' ? 'minuman' : cat === 'makanan' ? 'makanan' : 'Semua Kategori'}
             </button>
           ))}
         </div>
@@ -278,7 +276,7 @@ export default function MenuKatalogView() {
                   </span>
 
                   <div className="absolute bottom-2.5 left-3 text-white text-xs font-semibold drop-shadow-md">
-                    Stok: {item.stock} Porsi
+                    Stok: {item.stock}
                   </div>
                 </div>
 
