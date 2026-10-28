@@ -94,7 +94,7 @@ export default function Sidebar({ collapsed, setCollapsed, activeTab, setActiveT
             </div>
             {!collapsed && (
               <div className="flex flex-col whitespace-nowrap">
-                <span className="text-[1.1rem] font-bold text-white tracking-tight">Batak Store 808</span>
+                <span className="text-[1.1rem] font-bold text-white tracking-tight">Toko Mangara</span>
                 <span className="text-xs text-blue-500 font-semibold uppercase tracking-wider">Admin Panel</span>
               </div>
             )}

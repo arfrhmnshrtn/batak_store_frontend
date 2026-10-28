@@ -17,6 +17,7 @@ import {
   Receipt
 } from 'lucide-react';
 import ReceiptModal from './Modals/ReceiptModal';
+import { getMenuImageSrc, DEFAULT_MENU_IMAGE } from '../../utils/imageUrl';
 
 export default function PosView({ onAddOrder }) {
   const [selectedCategory, setSelectedCategory] = useState('semua');
@@ -53,7 +54,7 @@ export default function PosView({ onAddOrder }) {
               category: item.kategori,
               price: item.harga_jual,
               stock: item.stok,
-              image: item.url_gambar,
+              image: getMenuImageSrc(item.url_gambar),
               desc: item.desc || item.deskripsi || `${item.nama_item} spesial Angkringan.`
             };
           });
@@ -67,7 +68,7 @@ export default function PosView({ onAddOrder }) {
 
   const categories = [
     { id: 'semua', label: 'Semua Menu' },
-    { id: 'Rokok', label: 'Rokok' },
+    { id: 'rokok', label: 'Rokok' },
     { id: 'jajanan', label: 'Jajanan' },
     { id: 'minuman', label: 'Minuman' },
     { id: 'makanan', label: 'Makanan' },
@@ -265,7 +266,7 @@ export default function PosView({ onAddOrder }) {
                       className={`w-full h-full object-cover transition-transform duration-300 ${!isOutOfStock ? 'group-hover:scale-110' : ''}`}
                       onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src = 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80';
+                        e.target.src = DEFAULT_MENU_IMAGE;
                       }}
                     />
                   </div>

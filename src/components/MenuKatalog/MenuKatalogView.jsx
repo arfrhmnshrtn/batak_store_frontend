@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/axios';
-import { UtensilsCrossed, Plus, Search, CheckCircle2, Eye, Edit3, Trash2, Box, AlertTriangle } from 'lucide-react';
+import { UtensilsCrossed, Plus, Search, CheckCircle2, Edit3, Trash2, Box, AlertTriangle } from 'lucide-react';
 import AddEditMenuModal from './Modals/AddEditMenuModal';
+import { getMenuImageSrc, DEFAULT_MENU_IMAGE } from '../../utils/imageUrl';
+
 
 export default function MenuKatalogView() {
   const [selectedCategory, setSelectedCategory] = useState('semua');
   const [katalogQuery, setKatalogQuery] = useState('');
-
-  // Sample Preset Images for Quick Selection
-  const presetImages = [
-    { label: '🍢 Sate Kulit', url: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80' },
-    { label: '🍢 Sate Usus', url: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80' },
-    { label: '🍡 Sate Puyuh', url: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=600&q=80' },
-    { label: '🍙 Nasi Teri', url: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80' },
-    { label: '🐟 Nasi Bandeng', url: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80' },
-    { label: '☕ Wedang Jahe', url: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80' },
-    { label: '🍹 Es Teh', url: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80' },
-    { label: '🧇 Tempe Mendoan', url: 'https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80' }
-  ];
 
   const [menuList, setMenuList] = useState([]);
 
@@ -43,7 +33,8 @@ export default function MenuKatalogView() {
             rawHargaBeli: item.harga_modal,
             stock: stockNum,
             status: autoStatus,
-            image: item.url_gambar || 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80'
+            url_gambar: item.url_gambar, // simpan nilai asli untuk helper
+            image: getMenuImageSrc(item.url_gambar) // URL siap tampil
           };
         });
         setMenuList(mapped);
@@ -67,12 +58,11 @@ export default function MenuKatalogView() {
   // Form State
   const [formData, setFormData] = useState({
     name: '',
-    category: 'bakaran',
+    category: 'rokok',
     harga_jual: '4000',
     price: '2000',
     stock: 20,
     status: 'Tersedia',
-    image: presetImages[0].url,
     desc: ''
   });
 
@@ -97,7 +87,6 @@ export default function MenuKatalogView() {
       price: '2000',
       stock: 30,
       status: 'Tersedia',
-      image: presetImages[0].url,
       desc: ''
     });
     setIsModalOpen(true);
@@ -108,11 +97,10 @@ export default function MenuKatalogView() {
     setFormData({
       name: item.name,
       category: item.category,
-      harga_jual: item.harga_jual.replace(/[^0-9]/g, '') || item.rawHargaJual || '4000',
-      price: item.price.replace(/[^0-9]/g, '') || item.rawHargaBeli || '2000',
+      harga_jual: String(item.rawHargaJual || '4000'),
+      price: String(item.rawHargaBeli || '2000'),
       stock: item.stock,
       status: item.status,
-      image: item.image || presetImages[0].url,
       desc: item.desc || ''
     });
     setIsModalOpen(true);
@@ -258,7 +246,7 @@ export default function MenuKatalogView() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     onError={(e) => {
                       e.target.onerror = null;
-                      e.target.src = 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80';
+                      e.target.src = DEFAULT_MENU_IMAGE;
                     }}
                   />
 
@@ -352,7 +340,6 @@ export default function MenuKatalogView() {
         formData={formData}
         setFormData={setFormData}
         onSaveSuccess={handleSaveSuccess}
-        presetImages={presetImages}
       />
 
     </div>

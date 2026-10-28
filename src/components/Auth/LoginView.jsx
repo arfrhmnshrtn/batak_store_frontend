@@ -9,7 +9,7 @@ export default function LoginView({ onLoginSuccess }) {
   const [pin, setPin] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const [kasirList, setKasirList] = useState([]);
   const [selectedKasir, setSelectedKasir] = useState('');
 
@@ -66,7 +66,7 @@ export default function LoginView({ onLoginSuccess }) {
           role: data.role || role.toUpperCase(),
           permissions: data.permissions || [],
         });
-        
+
         // Notify App.jsx
         if (onLoginSuccess) {
           onLoginSuccess(role);
@@ -78,12 +78,12 @@ export default function LoginView({ onLoginSuccess }) {
     } catch (err) {
       const errorMessage = err?.response?.data?.message || err?.message || 'Terjadi kesalahan sistem';
       // Normalize error message (e.g. backend sends 'PIN_SALAH' or similar)
-      const mappedMsg = errorMessage === 'PIN_SALAH' 
+      const mappedMsg = errorMessage === 'PIN_SALAH'
         ? 'PIN salah. Silakan coba lagi.'
-        : errorMessage === 'PENGGUNA_TIDAK_DITEMUKAN' || errorMessage === 'KASIR_NONAKTIF' 
+        : errorMessage === 'PENGGUNA_TIDAK_DITEMUKAN' || errorMessage === 'KASIR_NONAKTIF'
           ? 'Akun kasir ini dinonaktifkan atau tidak ditemukan.'
           : errorMessage;
-          
+
       setError(mappedMsg);
       setPin('');
     } finally {
@@ -112,7 +112,7 @@ export default function LoginView({ onLoginSuccess }) {
           <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 text-primary">
             <Store size={32} />
           </div>
-          <h1 className="text-2xl font-black text-text tracking-tight">Batak Store 808</h1>
+          <h1 className="text-2xl font-black text-text tracking-tight">Toko Mangara</h1>
           <p className="text-sm text-text-secondary mt-1">Silakan masuk untuk melanjutkan</p>
         </div>
 
@@ -160,7 +160,7 @@ export default function LoginView({ onLoginSuccess }) {
             </select>
           </div>
         )}
-        
+
         {role === 'owner' && <div className="mb-6"></div>}
 
         {/* PIN Input Field */}
@@ -185,10 +185,10 @@ export default function LoginView({ onLoginSuccess }) {
               disabled={isLoading}
             />
           </div>
-          
+
           <div className="h-4 mt-3 text-center">
-             {error && <span className="text-danger text-xs font-bold flex items-center justify-center gap-1"><Lock size={12}/>{error}</span>}
-             {isLoading && <span className="text-primary text-xs font-bold flex items-center justify-center gap-1">Memverifikasi...</span>}
+            {error && <span className="text-danger text-xs font-bold flex items-center justify-center gap-1"><Lock size={12} />{error}</span>}
+            {isLoading && <span className="text-primary text-xs font-bold flex items-center justify-center gap-1">Memverifikasi...</span>}
           </div>
         </div>
 
